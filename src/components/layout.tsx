@@ -40,23 +40,31 @@ const items: MenuItem[] = [
   ]),
   getItem("Files", "9", <FileOutlined />)
 ];
-const collapsed = false;
 class LayOut extends Component {
+  collapsed: boolean = false;
   onCollapse = (collapsed: boolean) => {
     console.log(collapsed);
     this.setState({ collapsed });
+  };
+  onClick: MenuProps["onClick"] = (e) => {
+    console.log("click ", e);
   };
   render() {
     return (
       <>
         <Layout style={{ minHeight: "100vh" }}>
-          <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+          <Sider
+            collapsible
+            collapsed={this.collapsed}
+            onCollapse={this.onCollapse}
+          >
             <div className="logo" />
             <Menu
               theme="dark"
               defaultSelectedKeys={["1"]}
               mode="inline"
               items={items}
+              onClick={this.onClick}
             />
           </Sider>
           <Layout className="site-layout">
